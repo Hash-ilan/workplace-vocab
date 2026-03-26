@@ -32,7 +32,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 .level-btn{padding:12px 8px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);cursor:pointer;font-family:inherit;font-size:0.82rem;font-weight:500;color:var(--text2);text-align:center;transition:all .15s;position:relative;}
 .level-btn:hover:not(.locked-level){background:var(--surface2);}
 .level-btn.active{border-color:var(--accent);background:var(--accent-bg);color:var(--accent-text);}
-.level-btn.locked-level{opacity:1;cursor:pointer;}
+.level-btn.locked-level{opacity:.45;cursor:not-allowed;}
 .level-badge{display:block;font-size:1.1rem;font-weight:700;margin-bottom:2px;}
 .level-sub{display:block;font-size:0.68rem;color:var(--text3);}
 .level-lock{position:absolute;top:6px;right:8px;font-size:11px;}
@@ -249,12 +249,12 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="level-btn locked-level" id="lvl-b2" onclick="selectLevel('b2')">
           <span class="level-badge">B2</span>
           <span class="level-sub">Upper-intermediate</span>
-          <span class="level-lock" id="b2-lock">🔒</span>
+          
         </div>
         <div class="level-btn locked-level" id="lvl-c1" onclick="selectLevel('c1')">
           <span class="level-badge">C1</span>
           <span class="level-sub">Advanced</span>
-          <span class="level-lock" id="c1-lock">🔒</span>
+          
         </div>
       </div>
       <button class="btn btn-p b1-btn btn-full" id="start-btn" onclick="doLogin()">Start B1 →</button>
@@ -412,7 +412,7 @@ pay:{
   },
   c1:{
     vocab:[{en:'total reward framework',fr:'politique de rémunération globale'},{en:'clawback provision',fr:'clause de récupération'},{en:'vesting period',fr:'période d\'acquisition des droits'},{en:'carried interest',fr:'intérêts portés'},{en:'benchmark salary',fr:'salaire de référence'},{en:'contractual entitlement',fr:'droit contractuel'},{en:'non-disclosure agreement (NDA)',fr:'accord de confidentialité'},{en:'retention bonus',fr:'prime de fidélisation'},{en:'pensionable earnings',fr:'revenus soumis à pension'},{en:'stock option plan',fr:'plan d\'options sur actions'},{en:'sign-on bonus',fr:'prime à l\'embauche'},{en:'expatriate allowance',fr:'indemnité d\'expatriation'}],
-    emoji:[{word:'clawback provision',emoji:'↩️',hint:'recovering previously paid bonuses'},{word:'vesting period',emoji:'📅',hint:'time before options can be exercised'},{word:'non-disclosure agreement',emoji:'🤫',hint:'confidentiality contract'},{word:'retention bonus',emoji:'🔒',hint:'incentive to stay with company'},{word:'stock option plan',emoji:'📊',hint:'right to buy shares at fixed price'},{word:'sign-on bonus',emoji:'✍️',hint:'payment for joining a company'}],
+    emoji:[{word:'clawback provision',emoji:'↩️',hint:'recovering previously paid bonuses'},{word:'vesting period',emoji:'📅',hint:'time before options can be exercised'},{word:'non-disclosure agreement',emoji:'🤫',hint:'confidentiality contract'},{word:'retention bonus',emoji:'',hint:'incentive to stay with company'},{word:'stock option plan',emoji:'📊',hint:'right to buy shares at fixed price'},{word:'sign-on bonus',emoji:'✍️',hint:'payment for joining a company'}],
     mcq:[{q:"What is a 'clawback provision' in an executive contract?",a:"A clause enabling the company to recover previously paid bonuses if certain conditions are later breached",o:["A penalty clause requiring advance notice before resignation","A clause enabling the company to recover previously paid bonuses if certain conditions are later breached","A restriction on the executive's ability to sell company shares","A tax relief arrangement applicable to share-based compensation"]},{q:"What is the 'vesting period' in a share option plan?",a:"The period an employee must wait before being entitled to exercise their options",o:["The duration of an employee's fixed-term contract","The notice period required upon resignation","The period an employee must wait before being entitled to exercise their options","The period during which salary reviews are frozen"]},{q:"What does 'carried interest' refer to?",a:"A share of the profits allocated to fund managers, typically in private equity",o:["The accumulated interest on an employee's pension contributions","A share of the profits allocated to fund managers, typically in private equity","Deferred salary payments accruing interest over time","The additional allowance paid to expatriate employees"]},{q:"What is a 'total reward framework'?",a:"A comprehensive approach to employee compensation encompassing pay, benefits, wellbeing and development",o:["A financial model used to calculate a company's total wage bill","A legally binding document outlining all employment terms","A comprehensive approach to employee compensation encompassing pay, benefits, wellbeing and development","A government scheme providing tax relief on employee benefits"]},{q:"What is a 'sign-on bonus'?",a:"A one-time payment offered to a new recruit as an incentive to accept a job offer",o:["A discretionary bonus paid after five years of service","A one-time payment offered to a new recruit as an incentive to accept a job offer","A contractual obligation to pay a departing employee's final salary","A performance bonus distributed at the end of the financial year"]}],
     gap:[{b:"The contract included a ",w:"clawback provision",a:" allowing the company to recover bonuses if targets were subsequently found to have been manipulated.",h:"clause de récupération"},{b:"Executives must complete the three-year ",w:"vesting period",a:" before they are entitled to exercise their options.",h:"période d'acquisition"},{b:"She negotiated a substantial ",w:"retention bonus",a:" as an incentive to remain with the company through the merger.",h:"prime de fidélisation"},{b:"All employees are required to sign a ",w:"non-disclosure agreement",a:" before gaining access to proprietary financial data.",h:"accord de confidentialité"},{b:"The fund manager's ",w:"carried interest",a:" entitled him to 20% of the profits above the agreed hurdle rate.",h:"intérêts portés"}],
     scramble:[{w:'CLAWBACK',c:'Recovery of previously paid compensation — récupération'},{w:'VESTING',c:'The process of earning the right to options over time'},{w:'EXPATRIATE',c:'An employee posted abroad — expatrié'},{w:'CONTRACTUAL',c:'Relating to the terms of a formal agreement — contractuel'}],
@@ -464,7 +464,7 @@ const THEME_IDS=['jobs','hr','pay','events'];
 // ══════════════════════════════════════════════════════════════════════════════
 let userName='',userClass='';
 let selectedLevel='b1';
-let unlockedLevels=['b1','b2','c1']; // all levels open
+let unlockedLevels=['b1','b2','c1'];
 let levelProgress={b1:{jobs:{},hr:{},pay:{},events:{}},b2:{jobs:{},hr:{},pay:{},events:{}},c1:{jobs:{},hr:{},pay:{},events:{}}};
 let levelScores={b1:{jobs:{},hr:{},pay:{},events:{}},b2:{jobs:{},hr:{},pay:{},events:{}},c1:{jobs:{},hr:{},pay:{},events:{}}};
 let levelWrong={b1:{jobs:[],hr:[],pay:[],events:[]},b2:{jobs:[],hr:[],pay:[],events:[]},c1:{jobs:[],hr:[],pay:[],events:[]}};
@@ -493,8 +493,8 @@ function updateLevelButtons(){
   ['b1','b2','c1'].forEach(lvl=>{
     const btn=document.getElementById('lvl-'+lvl);
     const lock=document.getElementById(lvl+'-lock');
-    if(unlockedLevels.includes(lvl)){btn.classList.remove('locked-level');if(lock)lock.style.display='none';}
-    else{btn.classList.add('locked-level');if(lock)lock.style.display='block';}
+    btn.classList.remove('locked-level');
+    if(lock)lock.style.display='none';
   });
 }
 function doLogin(){
@@ -526,7 +526,7 @@ function renderThemeGrid(){
     const complete=done===ACT_TYPES.length;
     const th=DATA[tid];
     const el=document.createElement('div');el.className='theme-card'+(locked?' locked':'');
-    el.innerHTML=`<div class="t-icon">${th.icon}</div><p class="t-name">${th.name}</p><p class="t-sub">${th.sub}</p><span class="diff ${lm().diffCls}">${selectedLevel.toUpperCase()}</span><div class="t-prog" style="margin-top:8px;"><div class="t-prog-fill ${lm().fillCls}" style="width:${done/ACT_TYPES.length*100}%"></div></div><p class="t-meta">${done}/${ACT_TYPES.length} activities</p>${locked?'<span class="lock-icon">🔒</span>':''}${complete&&!locked?'<span class="t-done-badge">✓ Complete</span>':''}`;
+    el.innerHTML=`<div class="t-icon">${th.icon}</div><p class="t-name">${th.name}</p><p class="t-sub">${th.sub}</p><span class="diff ${lm().diffCls}">${selectedLevel.toUpperCase()}</span><div class="t-prog" style="margin-top:8px;"><div class="t-prog-fill ${lm().fillCls}" style="width:${done/ACT_TYPES.length*100}%"></div></div><p class="t-meta">${done}/${ACT_TYPES.length} activities</p>${locked?'<span class="lock-icon"></span>':''}${complete&&!locked?'<span class="t-done-badge">✓ Complete</span>':''}`;
     if(!locked)el.onclick=()=>openTheme(tid);
     g.appendChild(el);
   });
@@ -570,7 +570,7 @@ function markDone(act,sc,total){
   levelScores[selectedLevel][currentTheme][act]={score:sc,total};
   const btn=document.getElementById('abt-'+act);
   if(btn){btn.classList.add('done-act');btn.classList.remove('active-b1','active-b2','active-c1');}
-  // all levels and themes freely accessible from the start
+  // all levels and themes freely accessible
   const sub=document.getElementById('acts-sub');
   if(sub)sub.textContent=selectedLevel.toUpperCase()+' · '+lm().name+' · '+ACT_TYPES.filter(a=>levelProgress[selectedLevel][currentTheme][a]).length+'/'+ACT_TYPES.length+' done';
   renderThemeGrid();
@@ -761,7 +761,7 @@ function showFinalReport(){
   if(spellingErrors.length>3)recs.push('Focus on spelling accuracy — particularly compound terms and words of French/Latin origin.');
   if(allWrong.filter(w=>w.startsWith('Translation')).length>4)recs.push('Review the bilingual glossary for each theme to strengthen productive translation skills.');
   if(recs.length){html+=`<p class="section-title">Recommendations</p>`;recs.forEach(r=>{html+=`<div class="rec-item">💡 ${r}</div>`;});}
-  if(unlockedLevels.length>1){html+=`<p class="section-title">Progress across levels</p><div style="display:flex;gap:8px;flex-wrap:wrap;">`;['b1','b2','c1'].forEach(lvl=>{const m=LEVEL_META[lvl];const ts2=THEME_IDS.reduce((s,tid)=>s+ACT_TYPES.reduce((x,a)=>x+(levelScores[lvl][tid][a]?levelScores[lvl][tid][a].score:0),0),0);const tm2=THEME_IDS.reduce((s,tid)=>s+ACT_TYPES.reduce((x,a)=>x+(levelScores[lvl][tid][a]?levelScores[lvl][tid][a].total:0),0),0);const p2=pct(ts2,tm2);html+=`<div class="stat-card" style="min-width:100px;"><p class="stat-lbl">${lvl.toUpperCase()}</p><p class="stat-val" style="font-size:1.1rem;">${unlockedLevels.includes(lvl)?(p2>0?p2+'%':'Unlocked'):'🔒'}</p></div>`;});html+=`</div>`;}
+  if(unlockedLevels.length>1){html+=`<p class="section-title">Progress across levels</p><div style="display:flex;gap:8px;flex-wrap:wrap;">`;['b1','b2','c1'].forEach(lvl=>{const m=LEVEL_META[lvl];const ts2=THEME_IDS.reduce((s,tid)=>s+ACT_TYPES.reduce((x,a)=>x+(levelScores[lvl][tid][a]?levelScores[lvl][tid][a].score:0),0),0);const tm2=THEME_IDS.reduce((s,tid)=>s+ACT_TYPES.reduce((x,a)=>x+(levelScores[lvl][tid][a]?levelScores[lvl][tid][a].total:0),0),0);const p2=pct(ts2,tm2);html+=`<div class="stat-card" style="min-width:100px;"><p class="stat-lbl">${lvl.toUpperCase()}</p><p class="stat-val" style="font-size:1.1rem;">${unlockedLevels.includes(lvl)?(p2>0?p2+'%':'Unlocked'):''}</p></div>`;});html+=`</div>`;}
   cont.innerHTML=html;
 }
 </script>
