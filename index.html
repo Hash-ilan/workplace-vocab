@@ -32,7 +32,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 .level-btn{padding:12px 8px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);cursor:pointer;font-family:inherit;font-size:0.82rem;font-weight:500;color:var(--text2);text-align:center;transition:all .15s;position:relative;}
 .level-btn:hover:not(.locked-level){background:var(--surface2);}
 .level-btn.active{border-color:var(--accent);background:var(--accent-bg);color:var(--accent-text);}
-.level-btn.locked-level{opacity:.45;cursor:not-allowed;}
+.level-btn.locked-level{opacity:1;cursor:pointer;}
 .level-badge{display:block;font-size:1.1rem;font-weight:700;margin-bottom:2px;}
 .level-sub{display:block;font-size:0.68rem;color:var(--text3);}
 .level-lock{position:absolute;top:6px;right:8px;font-size:11px;}
@@ -464,7 +464,7 @@ const THEME_IDS=['jobs','hr','pay','events'];
 // ══════════════════════════════════════════════════════════════════════════════
 let userName='',userClass='';
 let selectedLevel='b1';
-let unlockedLevels=['b1','b2','c1'];
+let unlockedLevels=['b1','b2','c1']; // all levels open
 let levelProgress={b1:{jobs:{},hr:{},pay:{},events:{}},b2:{jobs:{},hr:{},pay:{},events:{}},c1:{jobs:{},hr:{},pay:{},events:{}}};
 let levelScores={b1:{jobs:{},hr:{},pay:{},events:{}},b2:{jobs:{},hr:{},pay:{},events:{}},c1:{jobs:{},hr:{},pay:{},events:{}}};
 let levelWrong={b1:{jobs:[],hr:[],pay:[],events:[]},b2:{jobs:[],hr:[],pay:[],events:[]},c1:{jobs:[],hr:[],pay:[],events:[]}};
@@ -570,7 +570,7 @@ function markDone(act,sc,total){
   levelScores[selectedLevel][currentTheme][act]={score:sc,total};
   const btn=document.getElementById('abt-'+act);
   if(btn){btn.classList.add('done-act');btn.classList.remove('active-b1','active-b2','active-c1');}
-  // all themes and levels are freely accessible — no progression lock
+  // all levels and themes freely accessible from the start
   const sub=document.getElementById('acts-sub');
   if(sub)sub.textContent=selectedLevel.toUpperCase()+' · '+lm().name+' · '+ACT_TYPES.filter(a=>levelProgress[selectedLevel][currentTheme][a]).length+'/'+ACT_TYPES.length+' done';
   renderThemeGrid();
@@ -723,7 +723,7 @@ function buildTR(td,c){
   c.appendChild(div);
   function build(){document.getElementById('tr-sc').textContent='0 / '+items.length;const list=document.getElementById('tr-list');list.innerHTML='';items.forEach((item,i)=>{const row=document.createElement('div');row.className='tr-pair';row.innerHTML=`<p class="tr-src">${item.src}</p><div><input class="tr-inp" id="tri-${i}" placeholder="${tr.tgtLbl} translation..." autocomplete="off"><p id="trf-${i}" style="font-size:.75rem;margin-top:3px;min-height:14px;"></p></div>`;list.appendChild(row);});}
   window.rstTR=build;
-  window.chkTR=()=>{let sc=0;items.forEach((item,i)=>{const v=(document.getElementById('tri-'+i).value||'').trim().toLowerCase();const tgt=item.tgt.toLowerCase();const ok=v===tgt||v===tgt.replace(/[()\/]/g,'').trim()||v===tgt.split('/')[0].trim();document.getElementById('trf-'+i).innerHTML=ok?'<span class="fb-ok">Correct!</span>':'<span class="fb-no">'+item.tgt+'</span>';if(ok)sc++;else addWrong('Translation: '+item.src+' → '+item.tgt);});document.getElementById('tr-sc').textContent=sc+' / '+items.length;if(sc>=Math.floor(items.length*.8)){markDone('translation',sc,items.length);const tidx=THEME_IDS.indexOf(currentTheme);const isLastTheme=tidx===THEME_IDS.length-1;const isLastLevel=selectedLevel==='c1';const allLevelDone=THEME_IDS.every(t=>ACT_TYPES.every(a=>levelProgress[selectedLevel][t][a]));completeBanner(c,allLevelDone?(isLastLevel?'All levels complete! 🎉':selectedLevel.toUpperCase()+' complete! 🎉'):'Theme complete! 🎉',allLevelDone&&!isLastLevel?'You have completed '+selectedLevel.toUpperCase()+'! You can now try '+( selectedLevel==='b1'?'B2':'C1')+' — use the ← Levels button.':allLevelDone&&isLastLevel?'Outstanding! You have completed all three levels.':'Theme complete — choose another theme or level!',allLevelDone&&!isLastLevel?'Select next level →':allLevelDone&&isLastLevel?'View final report →':'← Back to themes',allLevelDone&&!isLastLevel?()=>showView('login'):allLevelDone&&isLastLevel?showFinalReport:showThemes);}};
+  window.chkTR=()=>{let sc=0;items.forEach((item,i)=>{const v=(document.getElementById('tri-'+i).value||'').trim().toLowerCase();const tgt=item.tgt.toLowerCase();const ok=v===tgt||v===tgt.replace(/[()\/]/g,'').trim()||v===tgt.split('/')[0].trim();document.getElementById('trf-'+i).innerHTML=ok?'<span class="fb-ok">Correct!</span>':'<span class="fb-no">'+item.tgt+'</span>';if(ok)sc++;else addWrong('Translation: '+item.src+' → '+item.tgt);});document.getElementById('tr-sc').textContent=sc+' / '+items.length;if(sc>=Math.floor(items.length*.8)){markDone('translation',sc,items.length);const tidx=THEME_IDS.indexOf(currentTheme);const isLastTheme=tidx===THEME_IDS.length-1;const isLastLevel=selectedLevel==='c1';const allLevelDone=THEME_IDS.every(t=>ACT_TYPES.every(a=>levelProgress[selectedLevel][t][a]));completeBanner(c,allLevelDone?(isLastLevel?'All levels complete! 🎉':selectedLevel.toUpperCase()+' complete! 🎉'):'Theme complete! 🎉',allLevelDone&&!isLastLevel?'You have unlocked '+(selectedLevel==='b1'?'B2':'C1')+'! Return to the level selector.':allLevelDone&&isLastLevel?'Outstanding! You have completed all three levels.':'Next theme unlocked!',allLevelDone&&!isLastLevel?'Select next level →':allLevelDone&&isLastLevel?'View final report →':'← Back to themes',allLevelDone&&!isLastLevel?()=>showView('login'):allLevelDone&&isLastLevel?showFinalReport:showThemes);}};
   build();
 }
 
