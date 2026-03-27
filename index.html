@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Workplace — Vocabulary</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#F5F4F0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+.box{background:#fff;border:1px solid #D8D6D1;border-radius:16px;padding:2.25rem;width:100%;max-width:480px;}
+.logo{width:42px;height:42px;border-radius:10px;background:#1A4D8F;display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;font-size:1.3rem;}
+h1{font-size:1.25rem;font-weight:600;margin-bottom:4px;letter-spacing:-0.02em;color:#1A1917;}
+.sub{font-size:0.82rem;color:#5C5A56;margin-bottom:1.75rem;}
+.level-label{font-size:0.75rem;font-weight:500;color:#5C5A56;margin-bottom:.75rem;display:block;}
+.levels{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:.5rem;}
+.level-card{display:block;padding:1.25rem .75rem;border-radius:12px;border:1px solid #D8D6D1;text-decoration:none;text-align:center;transition:all .15s;cursor:pointer;}
+.level-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08);}
+.b1{border-color:#A3D4B5;background:#E6F4ED;}.b1:hover{background:#d0ecdd;}
+.b2{border-color:#FBBF24;background:#FEF3E2;}.b2:hover{background:#fde9c0;}
+.c1{border-color:#A78BFA;background:#EDE9FE;}.c1:hover{background:#ddd5fc;}
+.level-code{display:block;font-size:1.5rem;font-weight:700;margin-bottom:3px;}
+.b1 .level-code{color:#1A6B3C;}
+.b2 .level-code{color:#7A4A00;}
+.c1 .level-code{color:#4C1D95;}
+.level-name{display:block;font-size:0.72rem;font-weight:500;}
+.b1 .level-name{color:#1A6B3C;}
+.b2 .level-name{color:#7A4A00;}
+.c1 .level-name{color:#4C1D95;}
+.level-desc{display:block;font-size:0.65rem;color:#9B9896;margin-top:3px;}
+.info{font-size:0.75rem;color:#9B9896;text-align:center;margin-top:1rem;}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="logo">&#127970;</div>
+  <h1>The Workplace &#8212; Vocabulary</h1>
+  <p class="sub">CEFR adaptive &#183; Business English &#183; 4 themes &#183; 9 activities per level</p>
+  <span class="level-label">Choose your level to begin:</span>
+  <div class="levels">
+    <a class="level-card b1" href="b1.html">
+      <span class="level-code">B1</span>
+      <span class="level-name">Intermediate</span>
+      <span class="level-desc">Core workplace vocabulary</span>
+    </a>
+    <a class="level-card b2" href="b2.html">
+      <span class="level-code">B2</span>
+      <span class="level-name">Upper-intermediate</span>
+      <span class="level-desc">Collocations &amp; formal register</span>
+    </a>
+    <a class="level-card c1" href="c1.html">
+      <span class="level-code">C1</span>
+      <span class="level-name">Advanced</span>
+      <span class="level-desc">Complex business terminology</span>
+    </a>
+  </div>
+  <p class="info">Each level has 4 themes &#183; 9 activities each &#183; with progress report</p>
+</div>
+</body>
+</html>
